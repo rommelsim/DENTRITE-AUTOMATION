@@ -1,0 +1,1 @@
+{"image_size": [128, 128], "class_names": ["blue", "cyan", "faulty", "green", "orange", "pink", "red", "white", "yellow"], "batch_size": 32, "learning_rate": 0.0001}

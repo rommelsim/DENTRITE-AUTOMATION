@@ -1,0 +1,8 @@
+Prediction Report
+=================
+
+Image: photo (2).jpg -> Predicted Class: green, Confidence: 1.00
+Image: photo (3).jpg -> Predicted Class: green, Confidence: 1.00
+Image: photo (4).jpg -> Predicted Class: green, Confidence: 1.00
+Image: photo (5).jpg -> Predicted Class: green, Confidence: 1.00
+Image: photo.jpg -> Predicted Class: green, Confidence: 1.00
