@@ -1,24 +1,24 @@
-pipeline {
+pipeline{
     agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/rommelsim/DENTRITE-AUTOMATION.git'
-            }
+
+    stages{
+        stage('Checkout'){
+            checkout scm
         }
-        stage('Run Robot Tests') {
-            steps {  
-                sh '''
-                    python3 -m venv .venv
-                    source .venv/bin/activate
+        stage('Creating Virtual Env'){
+            steps{
+                script{
+                    def projectDir = workspace
+                    def venDir = "${projectDir}/venv"
 
-                    pip install -r requirements.txt
-                    pip install robotframework 
-
-                    pip list
-                    robot --version
-
-                '''
+                    if(fileExist(venDir)){
+                        echo "Virtual environment already exists. Skipping creation."
+                    }
+                    else{
+                        echo "Creating virtual environment in ${venvDir}..."
+                        sh "python3 -m venv ${venvDir}"
+                    }
+                }
             }
         }
     }
