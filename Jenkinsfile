@@ -1,33 +1,20 @@
-pipeline {
-    agent any
+stage('Run Robot Tests') {
+    steps {
+        sh '''
+            if [ ! -d ".venv" ]; then
+                python3 -m venv .venv  # Or virtualenv .venv if you prefer
+            fi
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                url: 'https://github.com/rommelsim/DENTRITE-AUTOMATION.git'
-            }
-        }
+            source .venv/bin/activate   # Linux/macOS
+            # .venv\\Scripts\\activate.bat  # Windows (adjust if needed)
 
-        stage('Run Robot Tests') {
-           steps {
-                sh '''
-                    # Create the virtual environment (if it doesn't exist)
-                    if [ ! -d ".venv" ]; then  # Check for the .venv directory
-                        python3 -m venv .venv
-                    fi
+            pip install -r requirements.txt
 
-                    # Activate the virtual environment
-                    source .venv/bin/activate  # Linux/macOS
-                    # .venv\\Scripts\\activate   # Windows (adjust if needed)
-
-                    # Install dependencies (from requirements.txt)
-                    pip install -r requirements.txt
-                '''
-                robot framework: 'MyRobotFramework',  // Important: Configure this (see below)
-                      source: 'driver.robot',         // Path to your test file
-                      outputDirectory: 'robot_reports'
-            }
-        }
+            pip list  # Lists installed packages - check for your dependencies
+            robot --version # Check Robot Framework version
+        '''
+        robot framework: 'MyRobotFramework',  // Configured in Global Tool Configuration
+              source: 'driver.robot',         // Relative path to your test file
+              outputDirectory: 'robot_reports'
     }
 }
