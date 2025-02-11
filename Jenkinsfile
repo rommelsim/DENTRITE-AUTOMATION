@@ -10,7 +10,7 @@ pipeline{
         stage('Creating Virtual Env'){
             steps{
                 script{
-                    sh "python --version"
+                    bat "python --version"
                 }
             }
         }
