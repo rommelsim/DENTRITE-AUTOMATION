@@ -32,5 +32,15 @@ pipeline{
                 }
             }
         }
+        stage('Run Robot'){
+            steps{
+                script{
+                    bat """
+                        call venv\\Scripts\\activate
+                        robot --outputdir results driver.robot
+                    """
+                }
+            }
+        }
     }
 }
