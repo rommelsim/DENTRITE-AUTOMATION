@@ -1,0 +1,5 @@
+selenium
+robotframework
+tensorflow
+numpy
+tk
