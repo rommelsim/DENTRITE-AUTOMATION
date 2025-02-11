@@ -12,14 +12,8 @@ pipeline{
                 script{
                     def projectDir = workspace
                     def venDir = "${projectDir}/venv"
-
-                    if(fileExist(venDir)){
-                        echo "Virtual environment already exists. Skipping creation."
-                    }
-                    else{
-                        echo "Creating virtual environment in ${venvDir}..."
-                        sh "python3 -m venv ${venvDir}"
-                    }
+                    sh "python3 -m venv ${venvDir}"
+                    
                 }
             }
         }
